@@ -11,7 +11,15 @@ const app = express();
 //middlewares
 
 app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
+app.use((err,req,res,next)=> { 
+    res.status(400).send({
+        error:err.message,
+        name: err.name,
+        friendly:err._message
+    });
+})
 
 //routes
 
