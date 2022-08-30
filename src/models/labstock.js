@@ -27,6 +27,10 @@ const labstockSchema = new Schema({
         required:true,
         trim:true
     },
+    status:{
+        type:String,
+        required:true
+    },
     location:{
         type:String,
         required:true,
