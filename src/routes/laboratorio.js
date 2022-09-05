@@ -2,15 +2,15 @@ import { Router } from 'express';
 import laboCtrl from '../controllers/laboController.js';
 
 const router = Router();
-const { getData, createData, getOneData, updateData, deleteData  } = laboCtrl;
+const { getItem, createItem, getOneItem, updateItem, deleteItem  } = laboCtrl;
 
 router.route('/')
-    .get(getData)
-    .post(createData)
+    .get(getItem)
+    .post(createItem)
 
 router.route('/:id')
-    .get(getOneData)
-    .put(updateData)
-    .delete(deleteData)    
+    .get(getOneItem)
+    .put(updateItem)
+    .delete(deleteItem)    
 
 export default router;

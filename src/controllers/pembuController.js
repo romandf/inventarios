@@ -1,55 +1,58 @@
 import Stockp from "../models/pembuModel.js";
+const stock = Stockp;
 
 const pembuCtrl = {};
 
-pembuCtrl.getData = async (req, res) => {
+pembuCtrl.getItem = async (req, res) => {
   try {
-    const item = await Stockp.find();
-    return res.status(200).json(item);
+    const items = await stock.find();
+    return res.status(200).json(items);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(500).json({ message: error.message});
   }
 };
 
 pembuCtrl.createItem = async (req, res) => {
-  try {
-    const itemBody = req.body;
-    const newItem = new Stockp(itemBody);
-    const item = await newItem.save();
-    return res.status(200).json({ message: "Item Saved.." });
-  } catch (error) {
-    return res.status(400).json({ message: message.error });
-  }
+    try{
+        const itemBody = req.body;
+        const newItem = new stock(itemBody);
+        await newItem.save();
+        return res.status(200).json({message: "New Item was created"});
+    }catch(error){
+        return res.status(500).json({message: error.message});
+    }
 };
-
 pembuCtrl.getOneItem = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const item = await Stockp.findById(id);
-    return res.status(200).json(item);
-  } catch (error) {
-    return res.status(400).json({ message: message.error });
-  }
+    try{
+        const id = req.params.id;
+        const item = await stock.findById(id);
+        if(!item) return res.sendStatus(404)
+        return res.status(200).json(item);
+    }catch(error){
+        return res.status(500).json({message: error.message});
+    }
 };
 
-pembuCtrl.updateItem = async (req, res) => {
+pembuCtrl.updateItem = async (req, res) => { 
   try {
     const id = req.params.id;
     const itemBody = req.body;
-    const newItem = await Stockp.findByIdAndUpdate(id, itemBody);
-    return res.status(200).json({ message: "Item Updated.." });
+      await stock.findByIdAndUpdate(id, itemBody);
+      return res.status(200).json({ message: "Item Updated.." });
   } catch (error) {
-    return res.status(400).json({ message: message.error });
+      return res.status(500).json({message: error.message});
   }
 };
-pembuCtrl.deleteItem = async(req, res) => {
+
+pembuCtrl.deleteItem = async (req, res) => {
   try{
     const id = req.params.id;
-    const item = await Stockp.findByIdAndDelete(id);
-    return res.status(200).json({message:"Item deleted from database.."})
+    const item = await stock.findByIdAndDelete(id);
+    if(!item) return res.sendStatus(404)
+    return res.sendStatus(204);
+    //res.status(200).json({message: "Item Deleted from Database"});
   }catch (error){
-    return res.status(400).json({message: message.error});
+    return res.status(500).json({message: error.message});
   }
-  
-};
+}
 export default pembuCtrl;
