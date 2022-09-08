@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import laboCtrl from '../controllers/laboController.js';
 
+
 const router = Router();
-const { getItem, createItem, getOneItem, updateItem, deleteItem  } = laboCtrl;
+const { getItem, createItem, getOneItem, updateItem, deleteItem, upImage  } = laboCtrl;
 
 router.route('/')
     .get(getItem)
@@ -11,6 +12,6 @@ router.route('/')
 router.route('/:id')
     .get(getOneItem)
     .put(updateItem)
-    .delete(deleteItem)    
-
+    .delete(deleteItem)
+       
 export default router;
