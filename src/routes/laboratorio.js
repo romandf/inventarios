@@ -3,7 +3,7 @@ import laboCtrl from '../controllers/laboController.js';
 
 
 const router = Router();
-const { getItem, createItem, getOneItem, updateItem, deleteItem, upImage  } = laboCtrl;
+const { getItem, createItem, getOneItem, updateItem, deleteItem } = laboCtrl;
 
 router.route('/')
     .get(getItem)
@@ -13,5 +13,4 @@ router.route('/:id')
     .get(getOneItem)
     .put(updateItem)
     .delete(deleteItem)
-       
 export default router;
