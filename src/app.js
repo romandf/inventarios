@@ -12,12 +12,12 @@ const app = express();
 app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+//app.use(express.urlencoded({ extended: false }));
 
 //Routes
 app.use("/api/laboratorio", labRoutes);
 app.use("/api/pembu", pembuRoutes);
 app.use("/api/ruoa", ruoaRoutes);
-app.use("/api/image", imageRoutes);
+app.use("/api/upload", imageRoutes);
 
 export default app;

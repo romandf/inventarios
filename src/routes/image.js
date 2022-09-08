@@ -1,8 +1,8 @@
 import { Router } from 'express';
+import imageCtrl from '../controllers/imageController.js';
 
 const router = Router();
 
-import imageCtrl from '../controllers/imageController.js';
 const {upImage} = imageCtrl;
 
 router.route('/')
