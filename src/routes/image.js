@@ -3,9 +3,9 @@ import imageCtrl from '../controllers/imageController.js';
 
 const router = Router();
 
-const {upImage} = imageCtrl;
+const {upImage, uploadFile} = imageCtrl;
 
 router.route('/')
-    .post(upImage)
+    .post(upImage, uploadFile)
 
 export default router;

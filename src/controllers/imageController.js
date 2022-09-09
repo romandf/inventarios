@@ -1,6 +1,7 @@
 import multer from "multer";
 import sharp from 'sharp';
 
+const pathImage="/home/delibes/javaScript-prog/stock-server/backend/src/optimize/"
 const imageCtrl = {};
 
 const storage = multer.diskStorage({
@@ -8,39 +9,28 @@ const storage = multer.diskStorage({
         cb( null, './uploads/' ) //imagen Cruda
     },
     filename: ( req, file, cb ) =>{
-        const ext = file.originalname.split('.').pop() //extrae la extension
-        cb(null, `${Date.now()}.${ext}`)
+        //const ext = file.originalname.split('.').pop() //extrae la extension
+        cb(null, `${Date.now()}-${file.originalname}`)
     }
 })
 const upload = multer({storage});
 
-const helperImg = (filePath, fileName, size = 300) => {
-    return sharp(filePath).resize(size).toFile(`./optimize/${fileName}`)
+const helperImg = async (filePath, fileName, size=300) => {
+    try{
+        await sharp(filePath)
+        .resize(size)
+        .toFile(pathImage+fileName)
+    }catch (error){
+        console.log(error);
+    }
 }
 
-imageCtrl.upImage = upload.single("image"), async (req, res) => {
-    if (req.file){
-        console.log("Uploading file...");
-        var image = req.file.filename;
-    }
-    else {
-        console.log("No file uploaded");
-        var image = "noimage.jpg";
-    }
+imageCtrl.upImage = upload.single('image')
 
-    let post = {
-        title: req.body.title,
-        section: req.body.section,
-        image: image,
-    }
+imageCtrl.uploadFile = (req, res) => {
+   console.log(req.file);
+     helperImg(req.file.path, `resize-${req.file.filename}`,100)
 
-    var postRef = fbRef.child("posts");
-
-    postRef.push().set(post);
-
-    req.flash("success_msg", "Post Created")
-    res.redirect("/"+ req.body.section.toLowerCase());
-
-};
-
+    res.send({data:"imagen Cargada"});
+}
 export default imageCtrl;
