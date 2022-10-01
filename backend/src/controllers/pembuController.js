@@ -1,5 +1,5 @@
-import Stockp from "../models/pembuModel.js";
-const stock = Stockp;
+import Pembu from "../models/pembuModel.js";
+const stock = Pembu;
 
 const pembuCtrl = {};
 
@@ -14,10 +14,23 @@ pembuCtrl.getItem = async (req, res) => {
 
 pembuCtrl.createItem = async (req, res) => {
     try{
-        const itemBody = req.body;
-        const newItem = new stock(itemBody);
-        await newItem.save();
-        return res.status(200).json({message: "New Item was created"});
+        const {name,stockNum,serieNum,trademark,model,status,location,description} = req.body;
+        const newItem = new stock({
+          name,
+          stockNum,
+          serieNum,
+          trademark,
+          model,
+          status,
+          location,
+          description
+        })
+        if(req.file){
+          const {filename} = req.file;
+          newItem.setImgUrl(filename)
+        }
+         newItem = await newItem.save();
+        return res.status(200).json(newItem);
     }catch(error){
         return res.status(500).json({message: error.message});
     }

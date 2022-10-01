@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { HOST, PORT } from '../config.js'
 
 const pembuSchema = new mongoose.Schema({
     name:{
@@ -41,10 +42,9 @@ const pembuSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    image:
+    imgUrl:
     {
-        url:String,
-        public_id:String
+        type:String,
     }
 },
     {
@@ -53,4 +53,7 @@ const pembuSchema = new mongoose.Schema({
     }
 );
 
-export default mongoose.model("Stockp", pembuSchema);
+pembuSchema.methods.setImgUrl = async function setImgUrl(filename){
+    return this.imgUrl = await `${HOST}:${PORT}/public/${filename}`;
+}
+export default mongoose.model("Pembu", pembuSchema);

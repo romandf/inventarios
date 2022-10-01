@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import {PORT, HOST } from '../config.js'
 
-const StockSchema = new mongoose.Schema({
+const laboSchema = new mongoose.Schema({
     name:{
         type:String,
         required: true,
@@ -52,8 +52,8 @@ const StockSchema = new mongoose.Schema({
     }
 );
 
-StockSchema.methods.setImgUrl = async function setImgUrl(filename){
+laboSchema.methods.setImgUrl = async function setImgUrl(filename){
    return this.imgUrl = await `${HOST}:${PORT}/public/${filename}`;
 }
 
-export default mongoose.model("Stock", StockSchema);
+export default mongoose.model("Labo", laboSchema);

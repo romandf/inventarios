@@ -9,7 +9,7 @@ import imageRoutes from "./routes/image.js";
 
 //varibles
 const app = express();
-const {pathname: uploads} = new URL('./uploads', import.meta.url)
+const {pathname: uploads} = new URL('./laboratory/uploads', import.meta.url)
 //midlewares
 app.use(morgan("dev"));
 app.use(cors());

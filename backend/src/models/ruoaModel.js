@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import {HOST, PORT } from '../config.js'
 
 const ruoaSchema = new mongoose.Schema({
     name:{
@@ -41,10 +42,9 @@ const ruoaSchema = new mongoose.Schema({
         type:String,
         trim:true
     },
-    image:
+    imgUrl:
     {
-        url:String,
-        public_id:String
+        type:String
     }
 },
     {
@@ -52,5 +52,8 @@ const ruoaSchema = new mongoose.Schema({
         versionKey:false
     }
 );
+ruoaSchema.methods.setImgUrl = function setImgUrl(filename){
+    return this.imgUrl = `${HOST}:${PORT}/public/${filename}`;
+}
 
-export default mongoose.model("Stockr", ruoaSchema);
+export default mongoose.model("Ruoa", ruoaSchema);
