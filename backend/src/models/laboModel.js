@@ -52,8 +52,8 @@ const laboSchema = new mongoose.Schema({
     }
 );
 
-laboSchema.methods.setImgUrl = async function setImgUrl(filename){
-   return this.imgUrl = await `${HOST}:${PORT}/public/${filename}`;
+laboSchema.methods.setImgUrl = function setImgUrl(filename){
+   return this.imgUrl = `${HOST}:${PORT}/public/${filename}`;
 }
 
 export default mongoose.model("Labo", laboSchema);

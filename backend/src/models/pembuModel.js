@@ -53,7 +53,7 @@ const pembuSchema = new mongoose.Schema({
     }
 );
 
-pembuSchema.methods.setImgUrl = async function setImgUrl(filename){
-    return this.imgUrl = await `${HOST}:${PORT}/public/${filename}`;
+pembuSchema.methods.setImgUrl = function setImgUrl(filename){
+    return this.imgUrl = `${HOST}:${PORT}/public/${filename}`;
 }
 export default mongoose.model("Pembu", pembuSchema);
