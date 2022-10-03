@@ -1,6 +1,21 @@
 import Ruoa from "../models/ruoaModel.js";
+import multer from "multer";
 
 const ruoaCtrl = {};
+
+const {pathname: uploads} = new URL('../uploads/ruoa', import.meta.url)
+const storage = multer.diskStorage({
+    destination: ( req, file, cb )=> {
+        cb( null, uploads) //imagen Cruda
+    },
+    filename: ( req, file, cb ) =>{
+        //const ext = file.originalname.split('.').pop() //extrae la extension
+        cb(null, `${Date.now()}-${file.originalname}`)
+    }
+})
+const upload = multer({storage});
+
+ruoaCtrl.upImage = upload.single('image')
 
 ruoaCtrl.getItem = async (req, res) => {
   try {

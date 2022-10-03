@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import ruoaCtrl from "../controllers/ruoaController.js";
-import imageCtrl from '../controllers/imageController.js';
+//import imageCtrl from '../controllers/imageController.js';
 
 const router = Router();
-const {getItem, createItem, getOneItem, updateItem, deleteItem } =ruoaCtrl;
-const {upImage, uploadFile} = imageCtrl;
+const {getItem, createItem, getOneItem, updateItem, deleteItem,upImage } =ruoaCtrl;
+//const {upImage, uploadFile} = imageCtrl;
 
 router.route('/')
     .get(getItem)

@@ -1,6 +1,21 @@
 import Labo from "../models/laboModel.js";
+import multer from "multer";
 
 const laboCtrl = {};
+const {pathname: uploads} = new URL('../uploads/labo', import.meta.url)
+const storage = multer.diskStorage({
+    destination: ( req, file, cb )=> {
+        cb( null, uploads) //imagen Cruda
+    },
+    filename: ( req, file, cb ) =>{
+        //const ext = file.originalname.split('.').pop() //extrae la extension
+        cb(null, `${Date.now()}-${file.originalname}`)
+    }
+})
+const upload = multer({storage});
+
+laboCtrl.upImage = upload.single('image')
+
 laboCtrl.getItem = async (req, res) => {
   try {
     const items = await Labo.find();

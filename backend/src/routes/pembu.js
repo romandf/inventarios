@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import pembuCtrl from '../controllers/pembuController.js';
-import imageCtrl from '../controllers/imageController.js';
+//import imageCtrl from '../controllers/imageController.js';
 
 
 const router = Router();
-const {getItem, createItem, getOneItem, updateItem, deleteItem } = pembuCtrl;
-const {upImage, uploadFile} = imageCtrl;
+const {getItem, createItem, getOneItem, updateItem, deleteItem, upImage } = pembuCtrl;
+//const {upImage, uploadFile} = imageCtrl;
 
 
 router.route('/')

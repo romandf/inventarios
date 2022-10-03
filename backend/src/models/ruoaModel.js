@@ -53,7 +53,7 @@ const ruoaSchema = new mongoose.Schema({
     }
 );
 ruoaSchema.methods.setImgUrl = function setImgUrl(filename){
-    return this.imgUrl = `${HOST}:${PORT}/public/${filename}`;
+    return this.imgUrl = `${HOST}:${PORT}/public/ruoa/${filename}`;
 }
 
 export default mongoose.model("Ruoa", ruoaSchema);

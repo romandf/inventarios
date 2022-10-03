@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import laboCtrl from '../controllers/laboController.js';
-import imageCtrl from '../controllers/imageController.js';
+//import imageCtrl from '../controllers/imageController.js';
 
 const router = Router();
-const { getItem, createItem, getOneItem, updateItem, deleteItem } = laboCtrl;
-const {upImage, uploadFile} = imageCtrl;
+const { getItem, createItem, getOneItem, updateItem, deleteItem, upImage } = laboCtrl;
+//const {upImage, uploadFile} = imageCtrl;
 
 router.route('/')
     .get(getItem)

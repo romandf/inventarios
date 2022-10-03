@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import labRoutes from "./routes/laboratorio.js";
 import pembuRoutes from "./routes/pembu.js";
 import ruoaRoutes from "./routes/ruoa.js";
-import imageRoutes from "./routes/image.js";
+//import imageRoutes from "./routes/image.js";
 
 //varibles
 const app = express();
@@ -23,6 +23,6 @@ app.use('/public', express.static(uploads));
 app.use("/api/laboratorio", labRoutes);
 app.use("/api/pembu", pembuRoutes);
 app.use("/api/ruoa", ruoaRoutes);
-app.use("/api/upload", imageRoutes);
+//app.use("/api/upload", imageRoutes);
 
 export default app;

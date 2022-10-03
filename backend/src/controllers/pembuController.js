@@ -1,6 +1,21 @@
 import Pembu from "../models/pembuModel.js";
 
 const pembuCtrl = {};
+import multer from "multer";
+
+const {pathname: uploads} = new URL('../uploads/pembu', import.meta.url)
+const storage = multer.diskStorage({
+    destination: ( req, file, cb )=> {
+        cb( null, uploads) //imagen Cruda
+    },
+    filename: ( req, file, cb ) =>{
+        //const ext = file.originalname.split('.').pop() //extrae la extension
+        cb(null, `${Date.now()}-${file.originalname}`)
+    }
+})
+const upload = multer({storage});
+
+pembuCtrl.upImage = upload.single('image')
 
 pembuCtrl.getItem = async (req, res) => {
   try {
@@ -49,8 +64,8 @@ pembuCtrl.updateItem = async (req, res) => {
   try {
     const id = req.params.id;
     const itemBody = req.body;
-      await Pembu.findByIdAndUpdate(id, itemBody);
-      return res.status(200).json({ message: "Item Updated.." });
+    const itemUpdated = await Pembu.findByIdAndUpdate(id,itemBody);
+      return res.status(200).json(itemUpdated);
   } catch (error) {
       return res.status(500).json({message: error.message});
   }

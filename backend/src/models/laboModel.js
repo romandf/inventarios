@@ -53,7 +53,7 @@ const laboSchema = new mongoose.Schema({
 );
 
 laboSchema.methods.setImgUrl = function setImgUrl(filename){
-   return this.imgUrl = `${HOST}:${PORT}/public/${filename}`;
+   return this.imgUrl = `${HOST}:${PORT}/public/labo/${filename}`;
 }
 
 export default mongoose.model("Labo", laboSchema);
